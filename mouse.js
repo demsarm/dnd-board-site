@@ -2,7 +2,7 @@ import { getMouseOver } from "./getMouseOver.js";
 import { grid } from "./grid.js";
 import { addCube } from "./addCube.js";
 import * as THREE from "https://esm.sh/three@0.160.0";
-import { changeControls } from "./main.js";
+import { changeControls } from "./camera.js";
 
 const modes = {
   ADD: 0,

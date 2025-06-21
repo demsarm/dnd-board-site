@@ -1,5 +1,6 @@
 import * as THREE from "https://esm.sh/three@0.160.0";
-import { scene, camera } from "./main.js";
+import { scene } from "./main.js";
+import { camera } from "./camera.js";
 import { layers } from "./layers.js";
 
 const raycaster = new THREE.Raycaster();
