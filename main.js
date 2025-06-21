@@ -2,6 +2,7 @@ import * as THREE from "https://esm.sh/three@0.160.0";
 import { OrbitControls } from "https://esm.sh/three@0.160.0/examples/jsm/controls/OrbitControls.js";
 import { layers } from "./layers.js";
 import { createDirectionalLight } from "./lighting.js";
+import { cfg } from "./configs.js";
 
 export const scene = new THREE.Scene();
 scene.background = new THREE.Color(0x2266dd);
@@ -23,6 +24,7 @@ export const camera = new THREE.PerspectiveCamera(
   0.1,
   1000
 );
+camera.position.set(...Object.values(cfg.initialCameraPosition));
 camera.layers.enable(layers.default);
 camera.layers.enable(layers.hoverCube);
 
