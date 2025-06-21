@@ -7,12 +7,12 @@ export class AddCube {
   constructor(scene, changeOpacity = true) {
     this.__forceHide = false;
     this.__scene = scene;
-    this.__forcedColor = null;
+    this.__color = 0xffffff;
 
     this.__hoverCube = new THREE.Mesh(
       new THREE.BoxGeometry(1, 1, 1),
       new THREE.MeshStandardMaterial({
-        color: 0xff0000,
+        color: 0xffffff,
         transparent: true,
         opacity: 0.5,
       })
@@ -40,8 +40,8 @@ export class AddCube {
     if (hoveredObject && hoveredObject.face && hoveredObject.object) {
       const normal = hoveredObject.face.normal;
       const coords = hoveredObject.object.position.clone();
-      if (this.__forcedColor) {
-        this.__hoverCube.material.color.set(this.__forcedColor);
+      if (this.__color) {
+        this.__hoverCube.material.color.set(this.__color);
       } else {
         this.__hoverCube.material.color.copy(
           hoveredObject.object.material.color
@@ -71,8 +71,12 @@ export class AddCube {
   /**
    * @param {THREE.Color | number | string} value
    */
-  set forcedColor(value) {
-    this.__forcedColor = value;
+  set color(value) {
+    this.__color = value;
+  }
+
+  get color() {
+    return this.__color;
   }
 
   /**

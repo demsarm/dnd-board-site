@@ -16,6 +16,8 @@ const MB = {
   RIGHT: 2,
 };
 
+let currentColor = 0xffffff;
+
 let moveBuffer = null;
 
 let currentMode = modes.ADD;
@@ -25,6 +27,8 @@ document.addEventListener("mouseup", (event) => {
 
   switch (currentMode) {
     case modes.ADD:
+      addCube.visible = true;
+      addCube.color = currentColor;
       const hoveredObject = getMouseOver(event);
       const coords = hoveredObject?.object?.position.clone();
       const normal = hoveredObject?.face?.normal;
@@ -33,10 +37,11 @@ document.addEventListener("mouseup", (event) => {
         x: coords.x + normal.x,
         y: coords.y + normal.y,
         z: coords.z + normal.z,
-        color: hoveredObject.object.material.color.getHex(),
+        color: addCube.color,
       });
       break;
     case modes.REMOVE:
+      addCube.visible = false;
       const removeObject = getMouseOver(event);
       const removeCoords = removeObject?.object?.position.clone();
       if (!removeObject || !removeCoords) return;
@@ -59,7 +64,7 @@ document.addEventListener("mouseup", (event) => {
           z: coords.z + normal.z,
           color: moveBuffer.material.color.getHex(),
         });
-        addCube.forcedColor = null;
+        addCube.color = null;
         addCube.visible = false;
         moveBuffer = null;
       } else {
@@ -70,13 +75,13 @@ document.addEventListener("mouseup", (event) => {
           z: moveBuffer.position.z,
         });
         addCube.visible = true;
-        addCube.forcedColor = moveBuffer.material.color;
+        addCube.color = moveBuffer.material.color;
       }
       break;
   }
 });
 
-document.querySelector("#menu").appendChild(
+document.querySelector("#menu").append(
   (() => {
     const btn = document.createElement("button");
     btn.addEventListener("click", () => {
@@ -88,10 +93,7 @@ document.querySelector("#menu").appendChild(
     img.alt = "Add Cube";
     btn.appendChild(img);
     return btn;
-  })()
-);
-
-document.querySelector("#menu").appendChild(
+  })(),
   (() => {
     const btn = document.createElement("button");
     btn.addEventListener("click", () => {
@@ -103,10 +105,7 @@ document.querySelector("#menu").appendChild(
     img.alt = "Remove Cube";
     btn.appendChild(img);
     return btn;
-  })()
-);
-
-document.querySelector("#menu").appendChild(
+  })(),
   (() => {
     const btn = document.createElement("button");
     btn.addEventListener("click", () => {
@@ -118,10 +117,20 @@ document.querySelector("#menu").appendChild(
     img.alt = "Move Cube";
     btn.appendChild(img);
     return btn;
-  })()
-);
-
-document.querySelector("#menu").appendChild(
+  })(),
+  (() => {
+    const div = document.createElement("div");
+    div.textContent = "Change color";
+    const input = document.createElement("input");
+    input.type = "color";
+    input.value = "#ffffff";
+    input.addEventListener("change", (event) => {
+      currentColor = parseInt(event.target.value.slice(1), 16);
+      addCube.color = currentColor;
+    });
+    div.appendChild(input);
+    return div;
+  })(),
   (() => {
     const div = document.createElement("div");
     div.textContent = "Invert mouse buttons";
