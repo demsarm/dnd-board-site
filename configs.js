@@ -25,5 +25,3 @@ export const cfg = {
     mapSize: 1 << 13,
   },
 };
-
-window.cfg = cfg; // Expose cfg globally for debugging
