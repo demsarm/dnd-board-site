@@ -41,8 +41,22 @@ document.querySelector("#menu").append(
     return btn;
   })(),
   (() => {
+    const btn = document.createElement("button");
+    const img = document.createElement("img");
+    img.src = "./assets/icons/mark.svg";
+    img.alt = "Mark Cube";
+    btn.appendChild(img);
+    return btn;
+  })(),
+  (() => {
     const div = document.createElement("div");
-    div.textContent = "Change color";
+    div.append(
+      (() => {
+        const label = document.createElement("label");
+        label.textContent = "Change color";
+        return label;
+      })()
+    );
     const input = document.createElement("input");
     input.type = "color";
     input.value = "#ffffff";
@@ -52,7 +66,13 @@ document.querySelector("#menu").append(
   })(),
   (() => {
     const div = document.createElement("div");
-    div.textContent = "Invert mouse buttons";
+    div.append(
+      (() => {
+        const label = document.createElement("label");
+        label.textContent = "Invert mouse buttons";
+        return label;
+      })()
+    );
     const checkbox = document.createElement("input");
     checkbox.type = "checkbox";
     checkbox.addEventListener("change", invertControlsHandler);
@@ -61,7 +81,13 @@ document.querySelector("#menu").append(
   })(),
   (() => {
     const div = document.createElement("div");
-    div.textContent = "Set time of day";
+    div.append(
+      (() => {
+        const label = document.createElement("label");
+        label.textContent = "Set time of day";
+        return label;
+      })()
+    );
     const input = document.createElement("input");
     input.type = "number";
     input.value = "12";

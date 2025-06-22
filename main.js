@@ -26,7 +26,7 @@ scene.add(directionalLight);
 scene.add(lightTarget);
 directionalLightTimeOfDay(directionalLight, 12);
 // if you need help visualizing the light
-scene.add(lightHelper);
+// scene.add(lightHelper);
 
 export function setTimeOfDay(hour) {
   directionalLightTimeOfDay(directionalLight, hour);
