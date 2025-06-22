@@ -28,10 +28,10 @@ orbitControls.update();
 
 export function changeControls(controls) {
   orbitControls.mouseButtons = {
+    ...orbitControls.mouseButtons,
     LEFT: controls.LEFT,
     MIDDLE: controls.MIDDLE,
     RIGHT: controls.RIGHT,
-    ...orbitControls.mouseButtons,
   };
   orbitControls.update();
 }
