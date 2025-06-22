@@ -2,7 +2,7 @@ import * as THREE from "https://esm.sh/three@0.160.0";
 import { cfg } from "./configs.js";
 
 export function createDirectionalLight() {
-  const light = new THREE.DirectionalLight(0xffffff, 1);
+  const light = new THREE.DirectionalLight(0xffffff, 2);
   light.position.set(100, 100, 100);
   light.target.position.set(0, 0, 0);
   light.castShadow = true;

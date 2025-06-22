@@ -48,7 +48,7 @@ export class Grid {
         "#include <dithering_fragment>",
         `
         float brightness = dot(normalize(vNormal), vec3(0.0, 1.0, 0.0));
-        brightness = 0.8 + 0.2 * brightness;
+        brightness = 0.9 + 0.1 * brightness;
         gl_FragColor.rgb *= brightness;
 
         #include <dithering_fragment>
