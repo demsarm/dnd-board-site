@@ -1,3 +1,6 @@
+@import url("./menu.css");
+@import url("./notifications.css");
+
 html,
 body {
   margin: 0;

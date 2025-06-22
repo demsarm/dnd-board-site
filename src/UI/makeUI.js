@@ -5,6 +5,7 @@ import {
   invertControlsHandler,
 } from "../core/mouse.js";
 import { setTimeOfDay } from "../../main.js";
+import { sendNotification } from "./notifications.js";
 
 document.querySelector("#menu").append(
   (() => {

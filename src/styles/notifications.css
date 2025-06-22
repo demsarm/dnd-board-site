@@ -1,0 +1,45 @@
+#notifications {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+}
+
+.notification {
+  opacity: 0;
+  transform: translateX(20px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  width: 100%;
+  background-color: #f9f9f9;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.notification.show {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.notification.hide {
+  opacity: 0;
+  transform: translateX(20px);
+}
+
+.notification.info {
+  border-color: #2196f3;
+  background-color: #e3f2fd;
+}
+.notification.warn {
+  border-color: #ff9800;
+  background-color: #fff3e0;
+}
+.notification.error {
+  border-color: #f44336;
+  background-color: #ffebee;
+}
