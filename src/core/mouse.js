@@ -1,12 +1,12 @@
-import { getMouseOver } from "./getMouseOver.js";
+import * as THREE from "https://esm.sh/three@0.160.0";
 import { grid } from "./grid.js";
 import { addCube } from "./addCube.js";
-import * as THREE from "https://esm.sh/three@0.160.0";
 import { changeControls } from "./camera.js";
-import { getObjectOutlineCode } from "./utils.js";
 import { scene } from "./scene.js";
-import { layers } from "./layers.js";
 import { updateOutlineObjects } from "./outlines.js";
+import { getMouseOver } from "../utils/getMouseOver.js";
+import { getObjectOutlineCode } from "../utils/utils.js";
+import { layers } from "../config/layers.js";
 
 export const modes = {
   ADD: 0,

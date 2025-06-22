@@ -1,8 +1,6 @@
 import * as THREE from "https://esm.sh/three@0.160.0";
-import { updateOutlineObjects } from "../outlines.js";
-import { clamp, randColor } from "../utils.js";
-import { cfg } from "../configs.js";
-import { layers } from "../layers.js";
+import { clamp, randColor } from "../utils/utils.js";
+import { cfg } from "../config/configs.js";
 
 export class Grid {
   constructor(scene, grid) {

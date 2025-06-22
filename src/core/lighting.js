@@ -1,5 +1,5 @@
 import * as THREE from "https://esm.sh/three@0.160.0";
-import { cfg } from "./configs.js";
+import { cfg } from "../config/configs.js";
 
 export function createDirectionalLight() {
   const light = new THREE.DirectionalLight(0xffffff, 2);

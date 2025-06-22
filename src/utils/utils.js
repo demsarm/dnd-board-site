@@ -1,5 +1,5 @@
-import { layers } from "./layers.js";
-import { colorLayers } from "./outlines.js";
+import { colorLayers } from "../core/outlines.js";
+
 export function randColor() {
   const r = Math.floor(Math.random() * 256);
   const g = Math.floor(Math.random() * 256);

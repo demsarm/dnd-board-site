@@ -1,7 +1,7 @@
 import * as THREE from "https://esm.sh/three@0.160.0";
-import { scene } from "./scene.js";
-import { camera } from "./camera.js";
-import { layers } from "./layers.js";
+import { scene } from "../core/scene.js";
+import { camera } from "../core/camera.js";
+import { layers } from "../config/layers.js";
 
 const raycaster = new THREE.Raycaster();
 const mouse = new THREE.Vector2();

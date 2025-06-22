@@ -3,8 +3,8 @@ import {
   setMode,
   changeColorHandler,
   invertControlsHandler,
-} from "./mouse.js";
-import { setTimeOfDay } from "./main.js";
+} from "../core/mouse.js";
+import { setTimeOfDay } from "../../main.js";
 
 document.querySelector("#menu").append(
   (() => {
@@ -13,7 +13,7 @@ document.querySelector("#menu").append(
       setMode(modes.ADD);
     });
     const img = document.createElement("img");
-    img.src = "./assets/icons/add.svg";
+    img.src = "./src/assets/icons/add.svg";
     img.alt = "Add Cube";
     btn.appendChild(img);
     return btn;
@@ -24,7 +24,7 @@ document.querySelector("#menu").append(
       setMode(modes.REMOVE);
     });
     const img = document.createElement("img");
-    img.src = "./assets/icons/remove.svg";
+    img.src = "./src/assets/icons/remove.svg";
     img.alt = "Remove Cube";
     btn.appendChild(img);
     return btn;
@@ -35,7 +35,7 @@ document.querySelector("#menu").append(
       setMode(modes.MOVE);
     });
     const img = document.createElement("img");
-    img.src = "./assets/icons/move.svg";
+    img.src = "./src/assets/icons/move.svg";
     img.alt = "Move Cube";
     btn.appendChild(img);
     return btn;
@@ -46,7 +46,7 @@ document.querySelector("#menu").append(
       setMode(modes.MARK);
     });
     const img = document.createElement("img");
-    img.src = "./assets/icons/mark.svg";
+    img.src = "./src/assets/icons/mark.svg";
     img.alt = "Mark Cube";
     btn.appendChild(img);
     return btn;

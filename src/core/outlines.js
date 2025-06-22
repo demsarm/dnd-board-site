@@ -1,11 +1,11 @@
 import * as THREE from "https://esm.sh/three@0.160.0";
 import { OutlinePass } from "https://esm.sh/three@0.160.0/examples/jsm/postprocessing/OutlinePass.js";
 import { composer } from "./composer.js";
-import { layers } from "./layers.js";
 import { camera } from "./camera.js";
 import { scene } from "./scene.js";
-import { getObjectOutlineCode } from "./utils.js";
-import { cfg } from "./configs.js";
+import { getObjectOutlineCode } from "../utils/utils.js";
+import { layers } from "../config/layers.js";
+import { cfg } from "../config/configs.js";
 
 const colors = {
   0b111: new THREE.Color(0xffffff),

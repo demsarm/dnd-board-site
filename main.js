@@ -2,14 +2,14 @@ import * as THREE from "https://esm.sh/three@0.160.0";
 import {
   createDirectionalLight,
   directionalLightTimeOfDay,
-} from "./lighting.js";
-import { scene } from "./scene.js";
-import { composer } from "./composer.js";
-import { camera, orbitControls } from "./camera.js";
-import { layers } from "./layers.js";
+} from "./src/core/lighting.js";
+import { scene } from "./src/core/scene.js";
+import { composer } from "./src/core/composer.js";
+import { camera, orbitControls } from "./src/core/camera.js";
+import { layers } from "./src/config/layers.js";
 
 const loader = new THREE.TextureLoader();
-loader.load("./assets/sky-final.png", (texture) => {
+loader.load("./src/assets/sky-final.png", (texture) => {
   texture.mapping = THREE.EquirectangularReflectionMapping;
   scene.background = texture;
 });

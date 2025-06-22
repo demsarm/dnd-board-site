@@ -1,7 +1,7 @@
 import * as THREE from "https://esm.sh/three@0.160.0";
-import { layers } from "../layers.js";
-import { getMouseOver } from "../getMouseOver.js";
-import { cfg } from "../configs.js";
+import { getMouseOver } from "../utils/getMouseOver.js";
+import { layers } from "../config/layers.js";
+import { cfg } from "../config/configs.js";
 
 export class AddCube {
   constructor(scene, changeOpacity = true) {

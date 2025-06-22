@@ -1,7 +1,7 @@
 import * as THREE from "https://esm.sh/three@0.160.0";
 import { OrbitControls } from "https://esm.sh/three@0.160.0/examples/jsm/controls/OrbitControls.js";
-import { layers } from "./layers.js";
-import { cfg } from "./configs.js";
+import { layers } from "../config/layers.js";
+import { cfg } from "../config/configs.js";
 import { renderer } from "./renderer.js";
 
 export const camera = new THREE.PerspectiveCamera(
