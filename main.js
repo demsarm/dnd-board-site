@@ -1,10 +1,9 @@
 import * as THREE from "https://esm.sh/three@0.160.0";
 import { createDirectionalLight } from "./lighting.js";
-import { renderer } from "./renderer.js";
+import { scene } from "./scene.js";
+import { composer } from "./composer.js";
 import { camera, orbitControls } from "./camera.js";
-
-export const scene = new THREE.Scene();
-scene.background = new THREE.Color(0x2266dd);
+import { layers } from "./layers.js";
 
 const loader = new THREE.TextureLoader();
 loader.load("./assets/sky-final.png", (texture) => {
@@ -28,14 +27,20 @@ scene.add(lightTarget);
 function animate() {
   requestAnimationFrame(animate);
   orbitControls.update();
-  renderer.render(scene, camera);
+
+  // Enable all layers you want visible
+  camera.layers.enable(layers.default);
+  camera.layers.enable(layers.hoverCube);
+  camera.layers.enable(layers.outlineRed);
+  camera.layers.enable(layers.outlineGreen);
+  camera.layers.enable(layers.outlineBlue);
+
+  composer.render();
 }
 animate();
 
-document.addEventListener("resize", () => {
-  document.querySelector("#scene").style.width = window.innerWidth + "px";
-  document.querySelector("#scene").style.height = window.innerHeight + "px";
+window.addEventListener("resize", () => {
   camera.aspect = window.innerWidth / window.innerHeight;
   camera.updateProjectionMatrix();
-  renderer.setSize(window.innerWidth, window.innerHeight);
+  composer.setSize(window.innerWidth, window.innerHeight);
 });

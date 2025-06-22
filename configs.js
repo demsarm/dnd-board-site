@@ -24,4 +24,10 @@ export const cfg = {
   lighting: {
     mapSize: 1 << 13,
   },
+  outlines: {
+    visibleEdgeColorFactor: 1,
+    hiddenEdgeColorFactor: 0.75,
+  },
 };
+
+Object.freeze(cfg);

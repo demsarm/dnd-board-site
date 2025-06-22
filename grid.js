@@ -1,4 +1,4 @@
-import { scene } from "./main.js";
+import { scene } from "./scene.js";
 import { Grid } from "./classes/Grid.js";
 import { cfg } from "./configs.js";
 

@@ -3,6 +3,10 @@ import { grid } from "./grid.js";
 import { addCube } from "./addCube.js";
 import * as THREE from "https://esm.sh/three@0.160.0";
 import { changeControls } from "./camera.js";
+import { getObjectOutlineCode } from "./utils.js";
+import { scene } from "./scene.js";
+import { layers } from "./layers.js";
+import { updateOutlineObjects } from "./outlines.js";
 
 const modes = {
   ADD: 0,
@@ -21,6 +25,36 @@ let currentColor = 0xffffff;
 let moveBuffer = null;
 
 let currentMode = modes.ADD;
+
+document.addEventListener("mousemove", (event) => {
+  switch (currentMode) {
+    case modes.ADD:
+      break;
+    case modes.REMOVE:
+      const hoveredObject = getMouseOver(event);
+      if (!hoveredObject) break;
+      scene.traverse((object) => {
+        if (getObjectOutlineCode(object) === 0b100) {
+          object.layers.disable(layers.outlineRed);
+        }
+      });
+      hoveredObject.object.layers.enable(layers.outlineRed);
+      updateOutlineObjects();
+      break;
+    case modes.MOVE:
+      if (moveBuffer) break;
+      const moveObject = getMouseOver(event);
+      if (!moveObject) break;
+      scene.traverse((object) => {
+        if (getObjectOutlineCode(object) === 0b100) {
+          object.layers.disable(layers.outlineRed);
+        }
+      });
+      moveObject.object.layers.enable(layers.outlineRed);
+      updateOutlineObjects();
+      break;
+  }
+});
 
 document.addEventListener("mouseup", (event) => {
   if (event.button !== MB.RIGHT) return;
