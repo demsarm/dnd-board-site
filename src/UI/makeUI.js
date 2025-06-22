@@ -111,3 +111,30 @@ document.querySelector("#menu").append(
     return div;
   })()
 );
+
+document.addEventListener("keyup", (ev) => {
+  switch (ev.key) {
+    case "a":
+      setMode(modes.ADD);
+      sendNotification("Switched to Add mode");
+      break;
+    case "s":
+      setMode(modes.REMOVE);
+      sendNotification("Switched to Remove mode");
+      break;
+    case "d":
+      setMode(modes.MOVE);
+      sendNotification("Switched to Move mode");
+      break;
+    case "f":
+      setMode(modes.MARK);
+      sendNotification("Switched to Mark mode");
+      break;
+    case "c":
+      const input = document.querySelector("input[type='color']");
+      if (input) {
+        input.click();
+      }
+      break;
+  }
+});
