@@ -12,6 +12,7 @@ export const modes = {
   ADD: 0,
   REMOVE: 1,
   MOVE: 2,
+  MARK: 3,
 };
 
 export const MB = {
@@ -28,31 +29,31 @@ let moveBuffer = null;
 
 let currentMode = modes.ADD;
 
+export function removeRedOutline(doUpdate = true) {
+  scene.traverse((object) => {
+    if (getObjectOutlineCode(object) === 0b100) {
+      object.layers.disable(layers.outlineRed);
+    }
+  });
+  if (doUpdate) updateOutlineObjects();
+}
+
 document.addEventListener("mousemove", (event) => {
+  removeRedOutline();
   switch (currentMode) {
     case modes.ADD:
       break;
     case modes.REMOVE:
       const hoveredObject = getMouseOver(event);
-      if (!hoveredObject) break;
-      scene.traverse((object) => {
-        if (getObjectOutlineCode(object) === 0b100) {
-          object.layers.disable(layers.outlineRed);
-        }
-      });
-      hoveredObject.object.layers.enable(layers.outlineRed);
+      removeRedOutline(!hoveredObject);
+      if (hoveredObject) hoveredObject.object.layers.enable(layers.outlineRed);
       updateOutlineObjects();
       break;
     case modes.MOVE:
       if (moveBuffer) break;
       const moveObject = getMouseOver(event);
-      if (!moveObject) break;
-      scene.traverse((object) => {
-        if (getObjectOutlineCode(object) === 0b100) {
-          object.layers.disable(layers.outlineRed);
-        }
-      });
-      moveObject.object.layers.enable(layers.outlineRed);
+      if (moveObject) moveObject.object.layers.enable(layers.outlineRed);
+
       updateOutlineObjects();
       break;
   }
@@ -114,11 +115,16 @@ document.addEventListener("mouseup", (event) => {
         addCube.color = moveBuffer.material.color;
       }
       break;
+    case modes.MARK:
+      const markObject = getMouseOver(event);
+      if (!markObject) return;
+      markObject.object.layers.toggle(layers.outlineGreen);
   }
 });
 
 export function setMode(mode) {
   currentMode = mode;
+  removeRedOutline();
   switch (mode) {
     case modes.ADD:
       addCube.visible = true;
@@ -128,6 +134,9 @@ export function setMode(mode) {
       break;
     case modes.MOVE:
       addCube.visible = !!moveBuffer;
+      break;
+    case modes.MARK:
+      addCube.visible = false;
       break;
   }
 }

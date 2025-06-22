@@ -42,6 +42,9 @@ document.querySelector("#menu").append(
   })(),
   (() => {
     const btn = document.createElement("button");
+    btn.addEventListener("click", () => {
+      setMode(modes.MARK);
+    });
     const img = document.createElement("img");
     img.src = "./assets/icons/mark.svg";
     img.alt = "Mark Cube";
