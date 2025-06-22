@@ -31,3 +31,16 @@ export function createDirectionalLight() {
 
   return { light, target: light.target, helper };
 }
+
+export function directionalLightTimeOfDay(light, hour) {
+  hour -= 6;
+  hour = hour % 24;
+  const angle = (hour / 24) * Math.PI * 2; // convert hour to radians
+  light.position.set(
+    100 * Math.cos(angle),
+    100 * Math.sin(angle),
+    100 * Math.sin(angle)
+  );
+  light.target.position.set(0, 0, 0);
+  light.updateMatrixWorld();
+}

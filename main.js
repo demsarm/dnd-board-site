@@ -1,5 +1,8 @@
 import * as THREE from "https://esm.sh/three@0.160.0";
-import { createDirectionalLight } from "./lighting.js";
+import {
+  createDirectionalLight,
+  directionalLightTimeOfDay,
+} from "./lighting.js";
 import { scene } from "./scene.js";
 import { composer } from "./composer.js";
 import { camera, orbitControls } from "./camera.js";
@@ -21,8 +24,14 @@ const {
 } = createDirectionalLight();
 scene.add(directionalLight);
 scene.add(lightTarget);
+directionalLightTimeOfDay(directionalLight, 12);
 // if you need help visualizing the light
-// scene.add(lightHelper);
+scene.add(lightHelper);
+
+export function setTimeOfDay(hour) {
+  directionalLightTimeOfDay(directionalLight, hour);
+  lightHelper.update();
+}
 
 function animate() {
   requestAnimationFrame(animate);

@@ -8,17 +8,19 @@ import { scene } from "./scene.js";
 import { layers } from "./layers.js";
 import { updateOutlineObjects } from "./outlines.js";
 
-const modes = {
+export const modes = {
   ADD: 0,
   REMOVE: 1,
   MOVE: 2,
 };
 
-const MB = {
+export const MB = {
   LEFT: 0,
   MIDDLE: 1,
   RIGHT: 2,
 };
+
+Object.freeze(modes);
 
 let currentColor = 0xffffff;
 
@@ -115,79 +117,40 @@ document.addEventListener("mouseup", (event) => {
   }
 });
 
-document.querySelector("#menu").append(
-  (() => {
-    const btn = document.createElement("button");
-    btn.addEventListener("click", () => {
-      currentMode = modes.ADD;
+export function setMode(mode) {
+  currentMode = mode;
+  switch (mode) {
+    case modes.ADD:
       addCube.visible = true;
-    });
-    const img = document.createElement("img");
-    img.src = "./assets/icons/add.svg";
-    img.alt = "Add Cube";
-    btn.appendChild(img);
-    return btn;
-  })(),
-  (() => {
-    const btn = document.createElement("button");
-    btn.addEventListener("click", () => {
-      currentMode = modes.REMOVE;
+      break;
+    case modes.REMOVE:
       addCube.visible = false;
-    });
-    const img = document.createElement("img");
-    img.src = "./assets/icons/remove.svg";
-    img.alt = "Remove Cube";
-    btn.appendChild(img);
-    return btn;
-  })(),
-  (() => {
-    const btn = document.createElement("button");
-    btn.addEventListener("click", () => {
-      currentMode = modes.MOVE;
+      break;
+    case modes.MOVE:
       addCube.visible = !!moveBuffer;
+      break;
+  }
+}
+
+export function changeColorHandler(event) {
+  currentColor = parseInt(event.target.value.slice(1), 16);
+  addCube.color = currentColor;
+}
+
+export function invertControlsHandler(event) {
+  if (event.target.checked) {
+    MB.LEFT = 2;
+    MB.RIGHT = 0;
+    changeControls({
+      LEFT: THREE.MOUSE.NONE,
+      RIGHT: THREE.MOUSE.ROTATE,
     });
-    const img = document.createElement("img");
-    img.src = "./assets/icons/move.svg";
-    img.alt = "Move Cube";
-    btn.appendChild(img);
-    return btn;
-  })(),
-  (() => {
-    const div = document.createElement("div");
-    div.textContent = "Change color";
-    const input = document.createElement("input");
-    input.type = "color";
-    input.value = "#ffffff";
-    input.addEventListener("change", (event) => {
-      currentColor = parseInt(event.target.value.slice(1), 16);
-      addCube.color = currentColor;
+  } else {
+    MB.LEFT = 0;
+    MB.RIGHT = 2;
+    changeControls({
+      LEFT: THREE.MOUSE.ROTATE,
+      RIGHT: THREE.MOUSE.NONE,
     });
-    div.appendChild(input);
-    return div;
-  })(),
-  (() => {
-    const div = document.createElement("div");
-    div.textContent = "Invert mouse buttons";
-    const checkbox = document.createElement("input");
-    checkbox.type = "checkbox";
-    checkbox.addEventListener("change", (event) => {
-      if (event.target.checked) {
-        MB.LEFT = 2;
-        MB.RIGHT = 0;
-        changeControls({
-          LEFT: THREE.MOUSE.NONE,
-          RIGHT: THREE.MOUSE.ROTATE,
-        });
-      } else {
-        MB.LEFT = 0;
-        MB.RIGHT = 2;
-        changeControls({
-          LEFT: THREE.MOUSE.ROTATE,
-          RIGHT: THREE.MOUSE.NONE,
-        });
-      }
-    });
-    div.appendChild(checkbox);
-    return div;
-  })()
-);
+  }
+}
