@@ -13,6 +13,7 @@ export const modes = {
   REMOVE: 1,
   MOVE: 2,
   MARK: 3,
+  EYEDROPPER: 4,
 };
 
 export const MB = {
@@ -119,6 +120,12 @@ document.addEventListener("mouseup", (event) => {
       const markObject = getMouseOver(event);
       if (!markObject) return;
       markObject.object.layers.toggle(layers.outlineGreen);
+    case modes.EYEDROPPER:
+      const eyedropperObject = getMouseOver(event);
+      if (!eyedropperObject) return;
+      currentColor = eyedropperObject.object.material.color.getHex();
+      addCube.color = currentColor;
+      setMode(modes.ADD);
   }
 });
 
@@ -136,6 +143,9 @@ export function setMode(mode) {
       addCube.visible = !!moveBuffer;
       break;
     case modes.MARK:
+      addCube.visible = false;
+      break;
+    case modes.EYEDROPPER:
       addCube.visible = false;
       break;
   }

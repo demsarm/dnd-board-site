@@ -53,6 +53,17 @@ document.querySelector("#menu").append(
     return btn;
   })(),
   (() => {
+    const btn = document.createElement("button");
+    btn.addEventListener("click", () => {
+      setMode(modes.EYEDROPPER);
+    });
+    const img = document.createElement("img");
+    img.src = "./src/assets/icons/eyedropper.svg";
+    img.alt = "Eyedropper Tool";
+    btn.appendChild(img);
+    return btn;
+  })(),
+  (() => {
     const div = document.createElement("div");
     div.append(
       (() => {
@@ -129,6 +140,10 @@ document.addEventListener("keyup", (ev) => {
     case "f":
       setMode(modes.MARK);
       sendNotification("Switched to Mark mode");
+      break;
+    case "x":
+      setMode(modes.EYEDROPPER);
+      sendNotification("Switched to Eyedropper mode");
       break;
     case "c":
       const input = document.querySelector("input[type='color']");
